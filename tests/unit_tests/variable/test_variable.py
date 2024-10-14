@@ -5,6 +5,7 @@ Testcases for variables:
 - ActiveLearning
 - VariableGroup
 """
+
 import numpy as np
 from profit.util.variable import Variable
 

@@ -536,11 +536,11 @@ class FitConfig(AbstractConfig):
                         {
                             "class": name,
                             "columns": select,
-                            "parameters": {
-                                k: float(v) for k, v in config.get("parameters", {})
-                            }
-                            if not isinstance(config, str)
-                            else {},
+                            "parameters": (
+                                {k: float(v) for k, v in config.get("parameters", {})}
+                                if not isinstance(config, str)
+                                else {}
+                            ),
                         }
                     )
 

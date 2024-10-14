@@ -122,9 +122,11 @@ def init_app(config):
                                             dcc.Dropdown(
                                                 id="invar_2",
                                                 options=dd_opts_in,
-                                                value=invars[1]
-                                                if len(invars) > 1
-                                                else invars[0],
+                                                value=(
+                                                    invars[1]
+                                                    if len(invars) > 1
+                                                    else invars[0]
+                                                ),
                                                 style=dd_sty,
                                             ),
                                             dcc.Checklist(
@@ -144,9 +146,11 @@ def init_app(config):
                                             dcc.Dropdown(
                                                 id="invar_3",
                                                 options=dd_opts_in,
-                                                value=invars[2]
-                                                if len(invars) > 2
-                                                else invars[0],
+                                                value=(
+                                                    invars[2]
+                                                    if len(invars) > 2
+                                                    else invars[0]
+                                                ),
                                                 style=dd_sty,
                                             ),
                                             dcc.Checklist(
@@ -1265,26 +1269,36 @@ def init_app(config):
                             ),
                             z=mesh_out[i].reshape((fit_sampling, fit_sampling)),
                             name=f"fit: {fit_dd}={fit_dd_values[i]:.2f}",
-                            surfacecolor=fit_dd_values[i]
-                            * np.ones([fit_sampling, fit_sampling])
-                            if fit_color == "multi-fit"
-                            else (
-                                mesh_in[i][invars.index(color_dd)].reshape(
-                                    (fit_sampling, fit_sampling)
+                            surfacecolor=(
+                                fit_dd_values[i] * np.ones([fit_sampling, fit_sampling])
+                                if fit_color == "multi-fit"
+                                else (
+                                    mesh_in[i][invars.index(color_dd)].reshape(
+                                        (fit_sampling, fit_sampling)
+                                    )
+                                    if (
+                                        fit_color == "marker-color"
+                                        and color_dd in invars
+                                    )
+                                    else mesh_out[i].reshape(
+                                        (fit_sampling, fit_sampling)
+                                    )
                                 )
-                                if (fit_color == "marker-color" and color_dd in invars)
-                                else mesh_out[i].reshape((fit_sampling, fit_sampling))
                             ),
                             opacity=fit_opacity,
-                            coloraxis="coloraxis2"
-                            if (
-                                fit_color == "multi-fit"
-                                or (
-                                    fit_color == "output"
-                                    and (color_dd != outvar and color_dd != "OUTPUT")
+                            coloraxis=(
+                                "coloraxis2"
+                                if (
+                                    fit_color == "multi-fit"
+                                    or (
+                                        fit_color == "output"
+                                        and (
+                                            color_dd != outvar and color_dd != "OUTPUT"
+                                        )
+                                    )
                                 )
-                            )
-                            else "coloraxis",
+                                else "coloraxis"
+                            ),
                             showlegend=True if len(invars) > 2 else False,
                         )
                     )
@@ -1302,33 +1316,38 @@ def init_app(config):
                                 * mesh_out_std[i].reshape((fit_sampling, fit_sampling)),
                                 showlegend=False,
                                 name=f"fit+v: {fit_dd}={fit_dd_values[i]:.2f}",
-                                surfacecolor=fit_dd_values[i]
-                                * np.ones([fit_sampling, fit_sampling])
-                                if fit_color == "multi-fit"
-                                else (
-                                    mesh_in[i][invars.index(color_dd)].reshape(
-                                        (fit_sampling, fit_sampling)
-                                    )
-                                    if (
-                                        fit_color == "marker-color"
-                                        and color_dd in invars
-                                    )
-                                    else mesh_out[i].reshape(
-                                        (fit_sampling, fit_sampling)
+                                surfacecolor=(
+                                    fit_dd_values[i]
+                                    * np.ones([fit_sampling, fit_sampling])
+                                    if fit_color == "multi-fit"
+                                    else (
+                                        mesh_in[i][invars.index(color_dd)].reshape(
+                                            (fit_sampling, fit_sampling)
+                                        )
+                                        if (
+                                            fit_color == "marker-color"
+                                            and color_dd in invars
+                                        )
+                                        else mesh_out[i].reshape(
+                                            (fit_sampling, fit_sampling)
+                                        )
                                     )
                                 ),
                                 opacity=fit_opacity,
-                                coloraxis="coloraxis2"
-                                if (
-                                    fit_color == "multi-fit"
-                                    or (
-                                        fit_color == "output"
-                                        and (
-                                            color_dd != outvar and color_dd != "OUTPUT"
+                                coloraxis=(
+                                    "coloraxis2"
+                                    if (
+                                        fit_color == "multi-fit"
+                                        or (
+                                            fit_color == "output"
+                                            and (
+                                                color_dd != outvar
+                                                and color_dd != "OUTPUT"
+                                            )
                                         )
                                     )
-                                )
-                                else "coloraxis",
+                                    else "coloraxis"
+                                ),
                             )
                         )
                         fig.add_trace(
@@ -1344,33 +1363,38 @@ def init_app(config):
                                 * mesh_out_std[i].reshape((fit_sampling, fit_sampling)),
                                 showlegend=False,
                                 name=f"fit-v: {fit_dd}={fit_dd_values[i]:.2f}",
-                                surfacecolor=fit_dd_values[i]
-                                * np.ones([fit_sampling, fit_sampling])
-                                if fit_color == "multi-fit"
-                                else (
-                                    mesh_in[i][invars.index(color_dd)].reshape(
-                                        (fit_sampling, fit_sampling)
-                                    )
-                                    if (
-                                        fit_color == "marker-color"
-                                        and color_dd in invars
-                                    )
-                                    else mesh_out[i].reshape(
-                                        (fit_sampling, fit_sampling)
+                                surfacecolor=(
+                                    fit_dd_values[i]
+                                    * np.ones([fit_sampling, fit_sampling])
+                                    if fit_color == "multi-fit"
+                                    else (
+                                        mesh_in[i][invars.index(color_dd)].reshape(
+                                            (fit_sampling, fit_sampling)
+                                        )
+                                        if (
+                                            fit_color == "marker-color"
+                                            and color_dd in invars
+                                        )
+                                        else mesh_out[i].reshape(
+                                            (fit_sampling, fit_sampling)
+                                        )
                                     )
                                 ),
                                 opacity=fit_opacity,
-                                coloraxis="coloraxis2"
-                                if (
-                                    fit_color == "multi-fit"
-                                    or (
-                                        fit_color == "output"
-                                        and (
-                                            color_dd != outvar and color_dd != "OUTPUT"
+                                coloraxis=(
+                                    "coloraxis2"
+                                    if (
+                                        fit_color == "multi-fit"
+                                        or (
+                                            fit_color == "output"
+                                            and (
+                                                color_dd != outvar
+                                                and color_dd != "OUTPUT"
+                                            )
                                         )
                                     )
-                                )
-                                else "coloraxis",
+                                    else "coloraxis"
+                                ),
                             )
                         )
                 fig.update_layout(
@@ -1420,20 +1444,24 @@ def init_app(config):
                         )
                     )
                     fig.update_xaxes(
-                        range=[
-                            log10(min(fig.data[1]["x"])),
-                            log10(max(fig.data[1]["x"])),
-                        ]
-                        if invar1_log == ["log"]
-                        else [min(fig.data[1]["x"]), max(fig.data[1]["x"])]
+                        range=(
+                            [
+                                log10(min(fig.data[1]["x"])),
+                                log10(max(fig.data[1]["x"])),
+                            ]
+                            if invar1_log == ["log"]
+                            else [min(fig.data[1]["x"]), max(fig.data[1]["x"])]
+                        )
                     )
                     fig.update_yaxes(
-                        range=[
-                            log10(min(fig.data[1]["y"])),
-                            log10(max(fig.data[1]["y"])),
-                        ]
-                        if invar2_log == ["log"]
-                        else [min(fig.data[1]["y"]), max(fig.data[1]["y"])]
+                        range=(
+                            [
+                                log10(min(fig.data[1]["y"])),
+                                log10(max(fig.data[1]["y"])),
+                            ]
+                            if invar2_log == ["log"]
+                            else [min(fig.data[1]["y"]), max(fig.data[1]["y"])]
+                        )
                     )
                     fig.update_layout(
                         xaxis_title=invar,
@@ -1531,9 +1559,11 @@ def init_app(config):
                 fig.update_traces(
                     marker=dict(
                         coloraxis="coloraxis2",
-                        color=indata[color_dd][sel_y]
-                        if color_dd in indata.dtype.names
-                        else outdata[color_dd][sel_y],
+                        color=(
+                            indata[color_dd][sel_y]
+                            if color_dd in indata.dtype.names
+                            else outdata[color_dd][sel_y]
+                        ),
                     ),
                     selector=dict(mode="markers"),
                 )
@@ -1549,12 +1579,14 @@ def init_app(config):
                 fig.update_traces(
                     marker=dict(
                         coloraxis="coloraxis2",
-                        color=outdata[outvar][sel_y]
-                        if color_dd == "OUTPUT"
-                        else (
-                            indata[color_dd][sel_y]
-                            if color_dd in indata.dtype.names
-                            else outdata[color_dd][sel_y]
+                        color=(
+                            outdata[outvar][sel_y]
+                            if color_dd == "OUTPUT"
+                            else (
+                                indata[color_dd][sel_y]
+                                if color_dd in indata.dtype.names
+                                else outdata[color_dd][sel_y]
+                            )
                         ),
                     ),
                     selector=dict(mode="markers"),
@@ -1581,12 +1613,14 @@ def init_app(config):
                 fig.update_traces(
                     marker=dict(
                         coloraxis="coloraxis",
-                        color=outdata[outvar][sel_y]
-                        if color_dd == "OUTPUT"
-                        else (
-                            indata[color_dd][sel_y]
-                            if color_dd in indata.dtype.names
-                            else outdata[color_dd][sel_y]
+                        color=(
+                            outdata[outvar][sel_y]
+                            if color_dd == "OUTPUT"
+                            else (
+                                indata[color_dd][sel_y]
+                                if color_dd in indata.dtype.names
+                                else outdata[color_dd][sel_y]
+                            )
                         ),
                     ),
                     selector=dict(mode="markers"),
@@ -1605,12 +1639,14 @@ def init_app(config):
                 fig.update_traces(
                     marker=dict(
                         coloraxis="coloraxis",
-                        color=outdata[outvar][sel_y]
-                        if color_dd == "OUTPUT"
-                        else (
-                            indata[color_dd][sel_y]
-                            if color_dd in indata.dtype.names
-                            else outdata[color_dd][sel_y]
+                        color=(
+                            outdata[outvar][sel_y]
+                            if color_dd == "OUTPUT"
+                            else (
+                                indata[color_dd][sel_y]
+                                if color_dd in indata.dtype.names
+                                else outdata[color_dd][sel_y]
+                            )
                         ),
                     ),
                     selector=dict(mode="markers"),

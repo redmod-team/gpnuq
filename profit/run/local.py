@@ -35,9 +35,11 @@ class LocalRunner(Runner, label="local"):
         return (
             f"<{self.__class__.__name__} (" + ", debug"
             if self.debug
-            else "" + f", {self.command}"
-            if self.command != "profit-worker"
-            else "" + ")>"
+            else (
+                "" + f", {self.command}"
+                if self.command != "profit-worker"
+                else "" + ")>"
+            )
         )
 
     @property

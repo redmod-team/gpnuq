@@ -4,6 +4,7 @@ training point. This is not the case in the standard procedure of randomly selec
 In order to get the most out of the least number of training points, the next point is inferred by calculating an
 acquisition function like the minimization of local variance or expected improvement.
 """
+
 import numpy as np
 from abc import abstractmethod
 from warnings import warn

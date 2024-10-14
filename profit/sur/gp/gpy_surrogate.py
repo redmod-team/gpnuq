@@ -155,13 +155,15 @@ class GPySurrogate(GaussianProcess):
                 kern = []
                 for key in full_str:
                     kern += [
-                        key
-                        if key in ("+", "*")
-                        else "self.GPy.kern.{}({}, lengthscale={}, variance={})".format(
-                            key,
-                            self.ndim,
-                            self.hyperparameters.get("length_scale", [1]),
-                            self.hyperparameters.get("sigma_f", 1) ** 2,
+                        (
+                            key
+                            if key in ("+", "*")
+                            else "self.GPy.kern.{}({}, lengthscale={}, variance={})".format(
+                                key,
+                                self.ndim,
+                                self.hyperparameters.get("length_scale", [1]),
+                                self.hyperparameters.get("sigma_f", 1) ** 2,
+                            )
                         )
                     ]
                 return eval("".join(kern))
