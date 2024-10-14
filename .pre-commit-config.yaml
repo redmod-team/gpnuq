@@ -5,19 +5,19 @@ repos:
     name: jupyter-clear-output
     files: \.ipynb$
     exclude: ^draft/
-    stages: [commit]
+    stages: [pre-commit]
     language: python
     additional_dependencies: ['nbconvert']
     entry: python3 -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.4.0
+  rev: v5.0.0
   hooks:
   - id: end-of-file-fixer
     exclude: ^draft/
   - id: trailing-whitespace
     exclude: ^draft/
 - repo: https://github.com/psf/black
-  rev: 23.7.0
+  rev: 24.10.0
   hooks:
   - id: black-jupyter
     exclude: ^draft/
