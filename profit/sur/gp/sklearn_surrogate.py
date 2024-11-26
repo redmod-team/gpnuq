@@ -144,10 +144,12 @@ class SklearnGPSurrogate(GaussianProcess):
             kernel = []
             for key in full_str:
                 kernel += [
-                    key
-                    if key in ("+", "*")
-                    else getattr(sklearn_kernels, key)(
-                        length_scale=self.hyperparameters["length_scale"]
+                    (
+                        key
+                        if key in ("+", "*")
+                        else getattr(sklearn_kernels, key)(
+                            length_scale=self.hyperparameters["length_scale"]
+                        )
                     )
                 ]
         except AttributeError:

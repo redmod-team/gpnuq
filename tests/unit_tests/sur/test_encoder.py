@@ -8,6 +8,7 @@ Separate linear-reduction tests:
 - PCA
 - Karuhnen-Loeve
 """
+
 import numpy as np
 from profit.sur.encoders import Encoder
 

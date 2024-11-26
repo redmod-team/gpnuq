@@ -1,4 +1,5 @@
 """Mockup domain code."""
+
 import numpy as np
 from h5py import File
 

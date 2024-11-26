@@ -1,4 +1,5 @@
 """Global default configuration values."""
+
 from os import path, getcwd
 
 # Base Config

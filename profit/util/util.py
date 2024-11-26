@@ -2,6 +2,7 @@
 
 This file contains miscellaneous useful functions.
 """
+
 from os import path
 from typing import Union
 from collections.abc import MutableMapping, Mapping

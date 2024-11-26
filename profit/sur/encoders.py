@@ -16,6 +16,7 @@ class Encoder(CustomABC):
     Attributes:
         label (str): Label of the encoder class.
     """
+
     labels = {}
 
     def __init__(self, columns, parameters=None):

@@ -4,6 +4,7 @@ Running this script generates Fortran code for kernels
 that is written to `kernels_base.f90`. This code has to
 be compiled via `make` subsequently.
 """
+
 # %%
 from sympy import symbols, sqrt, exp, diff
 from sympy.utilities.codegen import codegen

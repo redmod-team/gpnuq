@@ -1,4 +1,5 @@
 """ mockup 1D example with a custom postprocessor """
+
 from profit.run import Postprocessor, Worker
 import numpy as np
 

@@ -1,4 +1,5 @@
 """ versatile mockup Worker """
+
 from profit.run import Worker
 
 import numpy as np

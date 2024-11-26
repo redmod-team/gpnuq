@@ -73,9 +73,11 @@ class McmcAL(ActiveLearning):
             var.name for var in variables.list if var.kind.lower() == "activelearning"
         ]
         Xpred = [
-            np.linspace(*var.constraints, nsearch)
-            if var.name in al_keys
-            else np.unique(var.value)
+            (
+                np.linspace(*var.constraints, nsearch)
+                if var.name in al_keys
+                else np.unique(var.value)
+            )
             for var in variables.input_list
         ]
         self.Xpred = np.hstack(
